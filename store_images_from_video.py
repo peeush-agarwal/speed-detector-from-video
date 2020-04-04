@@ -11,7 +11,8 @@ def store_images_from_video(video_file_name, output_folder):
         ret, frame = cap.read()
         if ret == False:
             break
-        resized = imutils.resize(frame, height=300, width=300)
+        #resized = imutils.resize(frame, height=300, width=300) # Maintains the aspect ratio and not desired height/width
+        resized = cv2.resize(frame, (300, 300))
         cv2.imwrite(os.path.join(output_folder,'image'+str(i)+'.jpg'),resized)
         i+=1
     

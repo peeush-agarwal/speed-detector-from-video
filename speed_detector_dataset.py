@@ -10,7 +10,8 @@ class SpeedDetectorDataset(Dataset):
     self.label = []
     f = open(label_file, "r")
     for speed in f:
-        self.label.append(speed.replace('\n',''))
+        self.label.append(float(speed.replace('\n','')))
+    self.label = torch.FloatTensor(self.label)
 
   def __len__(self):
     """

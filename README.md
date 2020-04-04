@@ -14,6 +14,9 @@ Detect speed from given video of Car dashboard
 + Store text file from dataset
 + Build basic CNN model  
   + 3 blocks (CNN+maxpool)
-  + ReLU
   + Single neuron
-
+  + ReLU
++ Create CustomDataset to load images and speed from text file
++ Train model on given dataloader
++ Validate it on valiation dataset
++ Predict the speed from test dataset.

@@ -52,23 +52,21 @@ class SpeedChallengeModel(nn.Module):
         return out
 
 '''Train model'''
-def train(model, train_loader, criterion, optimizer, num_epochs = 1):
+def train(model, train_loader, criterion, optimizer, device, num_epochs = 1):
     for epoch in range(num_epochs):
+        epoch_loss = 0
         for i, (images, labels) in enumerate(train_loader):
-            print(f'i = {i}.................')
-            if (i > 0):
-                break
-            
+
             # Load images
             images = images.requires_grad_().to(device)
-            labels = labels.to(device)
+            labels = labels.view(-1, 1).to(device)
                 
             # Clear gradients w.r.t. parameters
             optimizer.zero_grad()
                 
             # Forward pass to get output/logits
             outputs = model(images)
-                
+
             # Calculate Loss: softmax --> cross entropy loss
             loss = criterion(outputs, labels)
                 
@@ -77,5 +75,9 @@ def train(model, train_loader, criterion, optimizer, num_epochs = 1):
                 
             # Updating parameters
             optimizer.step()
-         
-        print('Epoch: {}. Loss: {}.'.format(epoch+1, loss.item()))
+
+            epoch_loss += loss
+
+            print(f'Batch: {i+1}. Loss: {loss}.')
+
+        print('Epoch: {}. Loss: {}.'.format(epoch+1, epoch_loss/len(train_loader)))
