@@ -23,7 +23,7 @@ def visualize_images(trainloader):
 
 if __name__ == "__main__":
     input_folder = './Data/train'
-    output_folder = './Data/output'
+    output_folder = './Data/train/output'
     video_filename = 'train.mp4'
     text_filename = os.path.join(input_folder, 'train.txt')
     # store_images_from_video(os.path.join(input_folder, video_filename), output_folder)
